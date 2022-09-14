@@ -11,25 +11,7 @@ public class Worker : BackgroundService
     public Worker(ILogger<Worker> logger)
     {
         _logger = logger;
-
-        Logger.Instance.Init((Log log) =>
-        {
-            string msg = $"{log.src}: {log.msg}";
-            switch (log.lvl) {
-                case 0:
-                    _logger.LogTrace(msg, log.id);
-                    break;
-                case 2:
-                    _logger.LogInformation(msg, log.id);
-                    break;
-                case 4:
-                    _logger.LogError(msg, log.id);
-                    break;
-                case 5:
-                    _logger.LogCritical(msg, log.id);
-                    break;
-            }
-        });
+        InitializeLogger();
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -46,5 +28,28 @@ public class Worker : BackgroundService
             _logger.LogInformation("All done at: {time}", DateTimeOffset.Now);
             await Task.Delay(20 * 60 * 1000, stoppingToken);
         }
+    }
+
+    void InitializeLogger()
+    {
+        Logger.Instance.Init((Log log) =>
+        {
+            string msg = $"{log.src}: {log.msg}";
+            switch (log.lvl)
+            {
+                case 0:
+                    _logger.LogTrace(msg, log.id);
+                    break;
+                case 2:
+                    _logger.LogInformation(msg, log.id);
+                    break;
+                case 4:
+                    _logger.LogError(msg, log.id);
+                    break;
+                case 5:
+                    _logger.LogCritical(msg, log.id);
+                    break;
+            }
+        });
     }
 }
