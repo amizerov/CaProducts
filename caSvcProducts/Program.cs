@@ -6,6 +6,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     {
         services.AddHostedService<Worker>();
     })
+    .UseWindowsService()
     .UseNLog()
     .Build();
 
