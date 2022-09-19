@@ -34,21 +34,7 @@ public class Worker : BackgroundService
         Logger.Instance.Init((Log log) =>
         {
             string msg = $"{log.src}: {log.msg}";
-            switch (log.lvl)
-            {
-                case 0:
-                    _logger.LogTrace(msg, log.id);
-                    break;
-                case 2:
-                    _logger.LogInformation(msg, log.id);
-                    break;
-                case 4:
-                    _logger.LogError(msg, log.id);
-                    break;
-                case 5:
-                    _logger.LogCritical(msg, log.id);
-                    break;
-            }
+            _logger.Log((LogLevel)log.lvl, log.id, msg);
         });
     }
 }

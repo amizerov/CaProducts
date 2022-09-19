@@ -24,7 +24,10 @@ public abstract class Exchange
             product.CalcStat(klines);
             product.SaveStatToDb();
 
-            Log.Trace(ID, $"ProcessProducts({product.symbol})", product.TraceMessage);
+            int Number = products.IndexOf(product);
+            Log.Trace(ID, $"ProcessProducts({product.symbol})", 
+                $"{Number} of {products.Count} - [{product.TraceMessage}]");
+
             Thread.Sleep(1000);
         }
     }

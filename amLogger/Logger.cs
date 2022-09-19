@@ -2,11 +2,21 @@
 
 namespace amLogger
 {
+    public enum Level
+    {
+        Trace = 0,
+        Debug,
+        Info,
+        Warn,
+        Error,
+        Fatal,
+        None
+    }
     public class Log
     {
-        public int id = 0; // Exchange ID, default none - 0
-        public int lvl = 0; // Error level, default Trace - 0
-        public int type; // Type of message, reserved
+        public int id;          // Some ID
+        public int type;        // Type of message
+        public Level lvl;
         public string src = ""; // Source
         public string msg = ""; // Message
         public void Send()
@@ -23,27 +33,27 @@ namespace amLogger
         }
         public static void Info(string source, string message)
         {
-            Logger.Write(new Log() { lvl = 2, src = source, msg = message });
+            Logger.Write(new Log() { lvl = Level.Info, src = source, msg = message });
         }
         public static void Info(int exch_id, string source, string message)
         {
-            Logger.Write(new Log() { id = exch_id, lvl = 2, src = source, msg = message });
+            Logger.Write(new Log() { id = exch_id, lvl = Level.Info, src = source, msg = message });
         }
         public static void Error(string source, string message)
         {
-            Logger.Write(new Log() { lvl = 4, src = source, msg = message });
+            Logger.Write(new Log() { lvl = Level.Error, src = source, msg = message });
         }
         public static void Error(int exch_id, string source, string message)
         {
-            Logger.Write(new Log() { id = exch_id, lvl = 4, src = source, msg = message });
+            Logger.Write(new Log() { id = exch_id, lvl = Level.Error, src = source, msg = message });
         }
         public static void Fatal(string source, string message)
         {
-            Logger.Write(new Log() { lvl = 5, src = source, msg = message });
+            Logger.Write(new Log() { lvl = Level.Fatal, src = source, msg = message });
         }
         public static void Fatal(int exch_id, string source, string message)
         {
-            Logger.Write(new Log() { id = exch_id, lvl = 5, src = source, msg = message });
+            Logger.Write(new Log() { id = exch_id, lvl = Level.Fatal, src = source, msg = message });
         }
     }
     public class Logger
