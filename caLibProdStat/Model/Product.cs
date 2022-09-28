@@ -21,8 +21,14 @@ public class Product
     public void CalcStat(List<Kline> klines)
     {
         StatCalculator stat = new StatCalculator();
-        stat.DoCalc(klines);
-
+        try
+        {
+            stat.DoCalc(klines);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"DoCalc({symbol})", e.Message);
+        }
         volatility = stat.vola;
         liquidity = stat.liqu;
 

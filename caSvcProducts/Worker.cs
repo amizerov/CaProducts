@@ -1,5 +1,6 @@
 using amLogger;
 using caLibProdStat;
+using System.Reflection;
 
 namespace caSvcProducts;
 
@@ -17,7 +18,8 @@ public class Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Worker start running at: {time}", DateTimeOffset.Now);
+            _logger.LogInformation("Worker {ver} start running at: {time}", 
+                Assembly.GetExecutingAssembly().GetName().Version ,DateTimeOffset.Now);
 
             bool done = false;
             ProductsUpdater.Start(() => done = true);

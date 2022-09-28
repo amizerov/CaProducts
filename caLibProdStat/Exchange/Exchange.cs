@@ -16,19 +16,34 @@ public abstract class Exchange
     /// </summary>
     public void ProcessProducts()
     {
-        List<Product> products = GetProducts();
-        foreach (var product in products)
+        try
         {
-            List<Kline> klines = GetKlines(product.symbol, 1, 5);
+            List<Product> products = GetProducts();
+            foreach (var product in products)
+            {
+                List<Kline> klines;
+                try
+                {
+                    klines = GetKlines(product.symbol, 1, 5);
+                    
+                    product.CalcStat(klines);
+                    product.SaveStatToDb();
 
-            product.CalcStat(klines);
-            product.SaveStatToDb();
+                    int Number = products.IndexOf(product);
+                    Log.Trace(ID, $"ProcessProducts({product.symbol})",
+                        $"{Number} of {products.Count} - [{product.TraceMessage}]");
 
-            int Number = products.IndexOf(product);
-            Log.Trace(ID, $"ProcessProducts({product.symbol})", 
-                $"{Number} of {products.Count} - [{product.TraceMessage}]");
-
-            Thread.Sleep(1000);
+                    Thread.Sleep(1000);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"GetKlines({Name}/{product.symbol})", e.Message);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Log.Error($"ProcessProducts({Name})", e.Message);
         }
     }
 

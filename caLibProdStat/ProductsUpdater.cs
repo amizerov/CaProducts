@@ -1,4 +1,7 @@
-﻿namespace caLibProdStat
+﻿//using CryptoExchange.Net.Logging;
+using amLogger;
+
+namespace caLibProdStat
 {
     public class ProductsUpdater
     {
@@ -13,9 +16,19 @@
             foreach (Exchange ex in exs)
                 Task.Run(() => {
                     ex.ProcessProducts();
+                    Log.Info($"ProductsUpdater({ex.Name})", "Comleted");
                     cnt++;
-                    if (cnt == exs.Count) 
-                        if(complete != null) complete();
+                    Log.Info($"ProductsUpdater({ex.Name})", $"cnt = {cnt} of {exs.Count}");
+                    if (cnt == exs.Count)
+                    {
+                        Log.Info($"ProductsUpdater({ex.Name})", "cnt == exs.Count");
+                        if (complete != null)
+                        {
+                            complete();
+                            Log.Info($"ProductsUpdater({ex.Name})", "complete is called!");
+
+                        }
+                    }
                 });
         }
     }
