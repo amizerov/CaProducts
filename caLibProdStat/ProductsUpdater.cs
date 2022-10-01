@@ -7,13 +7,13 @@ namespace caLibProdStat
     {
         public static void Start(Action? complete)
         {
-            List<Exchange> exs = new() {
+            List<AnExchange> exs = new() {
                 new Binance(),
                 new Kucoin(),
                 new Huobi()
             };
             int cnt = 0;
-            foreach (Exchange ex in exs)
+            foreach (AnExchange ex in exs)
                 Task.Run(() => {
                     ex.ProcessProducts();
                     Log.Info($"ProductsUpdater({ex.Name})", "Comleted");

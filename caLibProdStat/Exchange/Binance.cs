@@ -5,7 +5,7 @@ using amLogger;
 
 namespace caLibProdStat;
 
-public class Binance : Exchange
+public class Binance : AnExchange
 {
     public override int ID => 1;
     public override string Name => "Binance";

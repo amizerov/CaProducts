@@ -6,7 +6,7 @@ using amLogger;
 
 namespace caLibProdStat;
 
-public class Huobi : Exchange
+public class Huobi : AnExchange
 {
     public override int ID => 3;
     public override string Name => "Huobi";

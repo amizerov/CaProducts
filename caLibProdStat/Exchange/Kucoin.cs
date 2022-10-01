@@ -5,7 +5,7 @@ using amLogger;
 
 namespace caLibProdStat;
 
-public class Kucoin : Exchange
+public class Kucoin : AnExchange
 {
     public override int ID => 2;
     public override string Name => "Kucoin";

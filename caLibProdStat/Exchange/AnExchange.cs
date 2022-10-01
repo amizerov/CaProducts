@@ -3,7 +3,7 @@ using amLogger;
 
 namespace caLibProdStat;
 
-public abstract class Exchange
+public abstract class AnExchange
 {
     public abstract int ID { get; }
     public abstract string Name { get; }
