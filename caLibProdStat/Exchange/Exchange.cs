@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net;
-using CryptoExchange.Net.CommonObjects;
+﻿using CryptoExchange.Net.CommonObjects;
 using amLogger;
 
 namespace caLibProdStat;
