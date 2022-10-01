@@ -1,4 +1,6 @@
 ﻿//using CryptoExchange.Net.Logging;
+//TODO: а что это такое?
+
 using amLogger;
 
 namespace caLibProdStat
@@ -15,6 +17,7 @@ namespace caLibProdStat
             int cnt = 0;
             foreach (AnExchange ex in exs)
                 Task.Run(() => {
+                    Log.Info($"ProductsUpdater({ex.Name})", "Started");
                     ex.ProcessProducts();
                     Log.Info($"ProductsUpdater({ex.Name})", "Comleted");
                     cnt++;
