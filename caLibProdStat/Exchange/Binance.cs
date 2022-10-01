@@ -33,7 +33,7 @@ public class Binance : AnExchange
         var r = client.SpotApi.ExchangeData.GetProductsAsync().Result;
         if (r.Success)
         {
-            Log.Trace(ID, "GetProducts", "start");
+            Log.Info(ID, "GetProducts", "start");
             foreach (var p in r.Data)
             {
                 Product product = ToProduct(p);
@@ -42,7 +42,7 @@ public class Binance : AnExchange
                     products.Add(product);
                 }
             }
-            Log.Trace(ID, "GetProducts", "got " + products.Count);
+            Log.Info(ID, "GetProducts", "got " + products.Count);
         }
         return products;
     }

@@ -34,7 +34,7 @@ public class Huobi : AnExchange
         var r = client.SpotApi.ExchangeData.GetSymbolsAsync().Result;
         if (r.Success)
         {
-            Log.Trace(ID, "GetProducts", "start");
+            Log.Info(ID, "GetProducts", "start");
             foreach (var p in r.Data)
             {
                 Product product = ToProduct(p);
@@ -43,7 +43,7 @@ public class Huobi : AnExchange
                     products.Add(product);
                 }
             }
-            Log.Trace(ID, "GetProducts", "got " + products.Count);
+            Log.Info(ID, "GetProducts", "got " + products.Count);
         }
         return products;
     }
