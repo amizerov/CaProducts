@@ -35,7 +35,9 @@ public class Worker : BackgroundService
     {
         Logger.Instance.Init((Log log) =>
         {
-            string msg = $"{log.src}: {log.msg}";
+            AnExchange? exch = ProductsUpdater.exchanges.FirstOrDefault(e => e.ID == log.id);
+            string exName = exch == null ? "****" : exch.Name.Substring(0, 4);
+            string msg = $"{exName} | {log.src}: {log.msg}";
             _logger.Log((LogLevel)log.lvl, new EventId(log.id/*Exchange ID*/), msg);
         });
     }
