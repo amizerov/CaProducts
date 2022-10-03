@@ -36,7 +36,7 @@ public class Worker : BackgroundService
         Logger.Instance.Init((Log log) =>
         {
             string msg = $"{log.src}: {log.msg}";
-            _logger.Log((LogLevel)log.lvl, log.id, msg);
+            _logger.Log((LogLevel)log.lvl, new EventId(log.id/*Exchange ID*/), msg);
         });
     }
 }

@@ -45,6 +45,11 @@ public class Huobi : AnExchange
             }
             Log.Info(ID, "GetProducts", "got " + products.Count);
         }
+        else
+        {
+            string err = r.Error!.Message;
+            Log.Error(ID, $"GetProducts)", err);
+        }
         return products;
     }
     protected override List<Kline> GetKlines(string symbol, int IntervarInMinutes, int PeriodInDays)

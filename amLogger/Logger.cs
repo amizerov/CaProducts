@@ -39,6 +39,14 @@ namespace amLogger
         {
             Logger.Write(new Log() { id = exch_id, lvl = Level.Info, src = source, msg = message });
         }
+        public static void Warn(string source, string message)
+        {
+            Logger.Write(new Log() { lvl = Level.Info, src = source, msg = message });
+        }
+        public static void Warn(int exch_id, string source, string message)
+        {
+            Logger.Write(new Log() { id = exch_id, lvl = Level.Warn, src = source, msg = message });
+        }
         public static void Error(string source, string message)
         {
             Logger.Write(new Log() { lvl = Level.Error, src = source, msg = message });

@@ -44,6 +44,11 @@ public class Kucoin : AnExchange
             }
             Log.Info(ID, "GetProducts", "got " + products.Count);
         }
+        else
+        {
+            string err = r.Error!.Message;
+            Log.Error(ID, $"GetProducts)", err);
+        }
         return products;
     }
     protected override List<Kline> GetKlines(string symbol, int IntervarInMinutes, int PeriodInDays)
@@ -68,14 +73,22 @@ public class Kucoin : AnExchange
             else
             {
                 string err = r.Error!.Message;
-                Log.Error(ID, $"GetProductStat({symbol})", r.Error!.Message);
 
                 if (err.Contains("Too Many"))
                 {
-                    Thread.Sleep(3000);
+                    if (countTrys > 0)
+                    {
+                        Log.Warn(ID, $"GetProductStat({symbol})", err);
+                        Thread.Sleep(3000);
+                    }
+                    else
+                        Log.Error(ID, $"GetProductStat({symbol})", err);
                 }
                 else
+                {
+                    Log.Error(ID, $"GetProductStat({symbol})", err);
                     break;
+                }
             }
         }
         return klines;
