@@ -47,7 +47,7 @@ public abstract class AnExchange
     }
 
     /// <summary>
-    /// Convert cpecific product for each exchange 
+    /// Convert a specific product for each exchange 
     /// to one model common class Product
     /// </summary>
     /// <param name="p">Object of type product for this exchange</param>
